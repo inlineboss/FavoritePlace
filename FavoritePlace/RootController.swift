@@ -1,21 +1,8 @@
-//
-//  RootControllerTableViewController.swift
-//  FavoritePlace
-//
-//  Created by inlineboss on 03.12.2019.
-//  Copyright © 2019 inlineboss. All rights reserved.
-//
-
 import UIKit
 
 class RootController: UITableViewController {
-
-    var restoranArray = [
-        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
-        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
-        "Speak Easy", "Morris Pub", "Вкусные истории",
-        "Классик", "Love&Life", "Шок", "Бочка"
-    ]
+    
+    let places =  Place.make()
     
     override func viewDidLoad() {
         
@@ -28,15 +15,17 @@ class RootController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restoranArray.count
+        return places.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
 
-        cell.nameLabel.text = restoranArray[indexPath.row]
-        cell.imageOfPlace.image = UIImage(named: restoranArray[indexPath.row])
+        cell.nameLabel.text = places[indexPath.row].name
+        cell.locationLabel.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds =  true
         
