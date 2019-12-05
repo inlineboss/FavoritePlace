@@ -37,8 +37,14 @@ class RootController: UITableViewController {
 
         cell?.textLabel?.text = restoranArray[indexPath.row]
         cell?.imageView?.image = UIImage(named: restoranArray[indexPath.row])
+        cell?.imageView?.layer.cornerRadius = cell?.frame.size.height ?? 10 / 2 
+        cell?.imageView?.clipsToBounds =  true
         
         return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
     }
     
 }
