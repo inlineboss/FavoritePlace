@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3941BBC42399778900748C11 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3941BBC32399778900748C11 /* CustomTableViewCell.swift */; };
 		394EFFDA2396DB6E00FECC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394EFFD92396DB6E00FECC31 /* AppDelegate.swift */; };
 		394EFFDC2396DB6E00FECC31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394EFFDB2396DB6E00FECC31 /* SceneDelegate.swift */; };
 		394EFFE12396DB6E00FECC31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394EFFDF2396DB6E00FECC31 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3941BBC32399778900748C11 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = ../CustomTableViewCell.swift; sourceTree = "<group>"; };
 		394EFFD62396DB6E00FECC31 /* FavoritePlace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavoritePlace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		394EFFD92396DB6E00FECC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		394EFFDB2396DB6E00FECC31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		394EFFD82396DB6E00FECC31 /* FavoritePlace */ = {
 			isa = PBXGroup;
 			children = (
+				3941BBC32399778900748C11 /* CustomTableViewCell.swift */,
 				394EFFED2396E06F00FECC31 /* RootController.swift */,
 				394EFFD92396DB6E00FECC31 /* AppDelegate.swift */,
 				394EFFDB2396DB6E00FECC31 /* SceneDelegate.swift */,
@@ -140,6 +143,7 @@
 			files = (
 				394EFFEE2396E06F00FECC31 /* RootController.swift in Sources */,
 				394EFFDA2396DB6E00FECC31 /* AppDelegate.swift in Sources */,
+				3941BBC42399778900748C11 /* CustomTableViewCell.swift in Sources */,
 				394EFFDC2396DB6E00FECC31 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

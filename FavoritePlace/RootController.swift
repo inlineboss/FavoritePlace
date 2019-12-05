@@ -33,14 +33,14 @@ class RootController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
 
-        cell?.textLabel?.text = restoranArray[indexPath.row]
-        cell?.imageView?.image = UIImage(named: restoranArray[indexPath.row])
-        cell?.imageView?.layer.cornerRadius = cell?.frame.size.height ?? 10 / 2 
-        cell?.imageView?.clipsToBounds =  true
+        cell.nameLabel.text = restoranArray[indexPath.row]
+        cell.imageOfPlace.image = UIImage(named: restoranArray[indexPath.row])
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds =  true
         
-        return cell!
+        return cell 
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
