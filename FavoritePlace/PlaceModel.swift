@@ -1,27 +1,18 @@
-import Foundation
+import RealmSwift
 
-
-struct Place {
-    var name : String
-    var location : String
-    var type : String
-    var image : String
+class Place : Object {
+    @objc dynamic var name : String = " "
+    @objc dynamic var location : String?
+    @objc dynamic var type : String?
+    @objc dynamic var imageData : Data?
+    @objc dynamic var restoranImage : String? = nil
     
-    static var restoranArray = [
-        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
-        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
-        "Speak Easy", "Morris Pub", "Вкусные истории",
-        "Классик", "Love&Life", "Шок", "Бочка"
-    ]
-    
-    static func make() -> [Place] {
+    convenience init(_ name : String, _ location: String?, _ type: String?, _ image: Data?) {
+        self.init()
         
-        var places = [Place]()
-        
-        for It in Place.restoranArray {
-            places.append(Place(name: It, location: "Moscow", type: "Retoran", image: It))
-        }
-        
-        return places
+        self.name = name
+        self.type = type
+        self.location = location
+        self.imageData = image
     }
 }
