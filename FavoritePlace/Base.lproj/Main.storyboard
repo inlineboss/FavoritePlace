@@ -27,7 +27,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="ybl-Xi-n8c">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="250.00000000000006"/>
                                                     <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                             </subviews>
@@ -141,6 +141,31 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="dc5-hM-DO7">
+                                        <rect key="frame" x="0.0" y="578" width="414" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dc5-hM-DO7" id="1xX-bw-QFB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-99-ZZa" customClass="RatingControl" customModule="FavoritePlace" customModuleProvider="target">
+                                                    <rect key="frame" x="87" y="48" width="240" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                                            <size key="value" width="44" height="44"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dbS-99-ZZa" firstAttribute="centerX" secondItem="1xX-bw-QFB" secondAttribute="centerX" id="W4r-pz-HfW"/>
+                                                <constraint firstItem="dbS-99-ZZa" firstAttribute="centerY" secondItem="1xX-bw-QFB" secondAttribute="centerY" id="dZd-bQ-3QP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -184,7 +209,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PmL-2C-vyk">
-                                <rect key="frame" x="0.0" y="126" width="414" height="744"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -249,8 +274,9 @@
                                     <outlet property="delegate" destination="QE1-9q-QNy" id="g46-F0-Sl9"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-0a-yRM">
-                                <rect key="frame" x="0.0" y="88" width="414" height="31"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-0a-yRM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.69999999999999996"/>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -265,7 +291,7 @@
                             <constraint firstItem="ohe-0a-yRM" firstAttribute="top" secondItem="FeE-gP-m3Z" secondAttribute="top" id="UgS-Yv-KIz"/>
                             <constraint firstItem="FeE-gP-m3Z" firstAttribute="trailing" secondItem="ohe-0a-yRM" secondAttribute="trailing" id="Y7N-IE-hv2"/>
                             <constraint firstItem="ohe-0a-yRM" firstAttribute="leading" secondItem="FeE-gP-m3Z" secondAttribute="leading" id="iq7-QI-DOe"/>
-                            <constraint firstItem="PmL-2C-vyk" firstAttribute="top" secondItem="ohe-0a-yRM" secondAttribute="bottom" constant="8" symbolic="YES" id="kZ7-4T-aJp"/>
+                            <constraint firstItem="PmL-2C-vyk" firstAttribute="top" secondItem="w5Q-Ok-JBd" secondAttribute="bottom" constant="-770" id="kZ7-4T-aJp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FeE-gP-m3Z"/>
                     </view>

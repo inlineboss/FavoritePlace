@@ -3,10 +3,29 @@ import RealmSwift
 
 class RootController: UIViewController {
     
-    var ascendingSorting = true
+   private var ascendingSorting = true
      
-     var places : Results<Place>!
-     var currentPlace : Place?
+    private var places : Results<Place>!
+    private var currentPlace : Place?
+    private var filteredPlace : Results<Place>!
+    private var searchController = UISearchController(searchResultsController: nil)
+    
+    private var isFiltring : Bool {
+        get {
+            return searchController.isActive && !searchBarIsEmpty
+        }
+    }
+    
+    private var searchBarIsEmpty : Bool {
+        get {
+            guard let text = searchController.searchBar.text else {
+                return false
+            }
+            
+            return text.isEmpty
+        }
+    }
+  
     
     @IBOutlet var tableView : UITableView!
     
@@ -19,6 +38,12 @@ class RootController: UIViewController {
         super.viewDidLoad()
         
         places = StorageManager.realm.objects(Place.self)
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search:"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     @IBAction func reverseSortAction(_ sender: UIBarButtonItem) {
@@ -39,12 +64,29 @@ class RootController: UIViewController {
     private func sortedData() {
         
         if segmentetController.selectedSegmentIndex == 0 {
-            
-            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        
+            if isFiltring {
+                
+                filteredPlace = filteredPlace.sorted(byKeyPath: "date", ascending: ascendingSorting)
+                
+            } else {
+                
+                places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+                
+            }
             
         } else if segmentetController.selectedSegmentIndex == 1 {
             
-            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+            if isFiltring {
+                
+                filteredPlace = filteredPlace.sorted(byKeyPath: "name", ascending: ascendingSorting)
+                
+            } else {
+                
+                places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+                
+            }
+            
             
         }
         
@@ -56,17 +98,25 @@ class RootController: UIViewController {
 // MARK: UITableView
 extension RootController : UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           
-           return places.isEmpty ? 0 : places.count
-       }
+        
+        if isFiltring {
+            return filteredPlace.count
+        }
+        
+       return places.isEmpty ? 0 : places.count
+    }
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
 
-           let place = places[indexPath.row]
-
+            let place = isFiltring ? filteredPlace[indexPath.row] : places[indexPath.row]
+        
            cell.nameLabel.text = place.name
            cell.locationLabel.text = place.location
            cell.typeLabel.text = place.type
@@ -111,7 +161,7 @@ extension RootController {
                 return
             }
             
-            destNewPlace.currentPlace = places[index]
+            destNewPlace.currentPlace = isFiltring ? filteredPlace[index] : places[index]
             
             
         }
@@ -125,6 +175,22 @@ extension RootController {
         
         tableView.reloadData()
         
+    }
+    
+}
+
+// MARK: Search text
+extension RootController : UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterSearchText(_ text : String) {
+        
+        filteredPlace = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", text, text)
+        
+        tableView.reloadData()
     }
     
 }
