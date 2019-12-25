@@ -4,7 +4,10 @@ import RealmSwift
 
 class StorageManager {
     
-    static let realm = try! Realm(fileURL: URL(string:"file:///Users/inlineboss/Documents/FavoritePlace/default.realm")!)
+    
+    static var config : Realm.Configuration!
+    
+    static var realm : Realm!
     
     static func save (_ place : Place) {
         

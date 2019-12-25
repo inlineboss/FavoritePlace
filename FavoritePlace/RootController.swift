@@ -1,12 +1,18 @@
 import UIKit
 import RealmSwift
 
-class RootController: UITableViewController {
+class RootController: UIViewController {
     
-    var places : Results<Place>!
-    var currentPlace : Place?
+    var ascendingSorting = true
+     
+     var places : Results<Place>!
+     var currentPlace : Place?
     
-//    var places =  Place.make()
+    @IBOutlet var tableView : UITableView!
+    
+    @IBOutlet weak var reversedSortButton: UIBarButtonItem!
+    
+    @IBOutlet weak var segmentetController: UISegmentedControl!
     
     override func viewDidLoad() {
         
@@ -14,50 +20,87 @@ class RootController: UITableViewController {
         
         places = StorageManager.realm.objects(Place.self)
     }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    @IBAction func reverseSortAction(_ sender: UIBarButtonItem) {
         
-        return places.isEmpty ? 0 : places.count
+        ascendingSorting.toggle()
+        
+        
+        reversedSortButton.image = ascendingSorting ? #imageLiteral(resourceName: "AZ") : #imageLiteral(resourceName: "ZA")
+        
+        sortedData()
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
-
-        let place = places[indexPath.row]
-
-        cell.nameLabel.text = place.name
-        cell.locationLabel.text = place.location
-        cell.typeLabel.text = place.type
-        cell.imageOfPlace.image = UIImage(data: place.imageData!)
-        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
-        cell.imageOfPlace.clipsToBounds =  true
-
-        return cell
+    @IBAction func sortedList(_ sender: UISegmentedControl) {
+        
+        sortedData()
+        
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+    private func sortedData() {
+        
+        if segmentetController.selectedSegmentIndex == 0 {
+            
+            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+            
+        } else if segmentetController.selectedSegmentIndex == 1 {
+            
+            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+            
+        }
+        
+        tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let rmPlace = places[indexPath.row]
-        
-        let contextDelete = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
-            
-            StorageManager.remove(rmPlace)
+}
 
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-         }
-        
-         let swipeActions = UISwipeActionsConfiguration(actions: [contextDelete])
-        
-        return swipeActions
-    }
+// MARK: UITableView
+extension RootController : UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+           
+           return places.isEmpty ? 0 : places.count
+       }
+
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+           let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CustomTableViewCell
+
+           let place = places[indexPath.row]
+
+           cell.nameLabel.text = place.name
+           cell.locationLabel.text = place.location
+           cell.typeLabel.text = place.type
+           cell.imageOfPlace.image = UIImage(data: place.imageData!)
+           cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+           cell.imageOfPlace.clipsToBounds =  true
+
+           return cell
+       }
+       
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+           return 85
+       }
+       
+        func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+           
+           let rmPlace = places[indexPath.row]
+           
+           let contextDelete = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+               
+               StorageManager.remove(rmPlace)
+
+               tableView.deleteRows(at: [indexPath], with: .automatic)
+               
+            }
+           
+            let swipeActions = UISwipeActionsConfiguration(actions: [contextDelete])
+           
+           return swipeActions
+       }
+}
+
+//MARK: Segue
+extension RootController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -85,3 +128,5 @@ class RootController: UITableViewController {
     }
     
 }
+
+
