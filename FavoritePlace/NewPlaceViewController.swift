@@ -19,6 +19,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var ratingController: RatingControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,8 @@ class NewPlaceViewController: UITableViewController {
             
             placeType.text = currentPlace?.type
             
+            ratingController.rating = Int(currentPlace?.rating ?? 0.0)
+            
             guard let imageData = currentPlace?.imageData, let image = UIImage(data: imageData) else {
                 return
             }
@@ -83,10 +86,12 @@ class NewPlaceViewController: UITableViewController {
             pngImage = #imageLiteral(resourceName: "imagePlaceholder").pngData()
         }
 
-        let newPlace = Place(placeName.text!,
-        placeLocation.text,
-        placeType.text,
-        pngImage)
+        let newPlace = Place(
+            placeName.text!,
+            placeLocation.text,
+            placeType.text,
+            pngImage,
+            Double(ratingController.rating) )
         
         if currentPlace != nil {
             
@@ -96,6 +101,7 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = Double(ratingController.rating)
             }
                 
         } else {
