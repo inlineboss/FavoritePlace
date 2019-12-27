@@ -11,7 +11,11 @@ import UIKit
 @IBDesignable class RatingControl: UIStackView {
 
     var buttons = [UIButton]()
-    var rating = 0
+    var rating = 0 {
+        didSet {
+            updateButtons()
+        }
+    }
     @IBInspectable var starSize : CGSize = CGSize(width: 44.0, height: 44.0) {
         didSet {
             setupButtons()
@@ -45,7 +49,15 @@ import UIKit
     
     @objc func ratingButtonTaped(sender: UIButton) {
         
-        print ("Button pressed 👏")
+        guard let index = buttons.firstIndex(of: sender) else { return }
+        
+        let selectedRating = index + 1
+        
+        if selectedRating == rating {
+            rating = 0
+        } else {
+            rating = selectedRating
+        }
         
     }
     
@@ -57,12 +69,23 @@ import UIKit
         }
         
         buttons.removeAll()
-                
+        
+        let bundle = Bundle(for: type(of: self))
+        
+        let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
+        let highlighStart = UIImage(named: "highlighStart", in: bundle, compatibleWith: self.traitCollection)
+        let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
+        
+        
+        
         for _ in 1 ... starCount {
                  
             let button = UIButton()
             
-            button.backgroundColor = .red
+            button.setImage(filledStar, for: .selected)
+            button.setImage(emptyStar, for: .normal)
+            button.setImage(highlighStart, for: .highlighted)
+            button.setImage(highlighStart, for: [.selected, .highlighted])
             
             button.translatesAutoresizingMaskIntoConstraints = false
              
@@ -75,6 +98,15 @@ import UIKit
                         
             buttons.append(button)
             
+        }
+        
+        updateButtons()
+    }
+    
+    
+    private func updateButtons() {
+        for (index, button) in buttons.enumerated() {
+            button.isSelected = index < rating
         }
     }
 
