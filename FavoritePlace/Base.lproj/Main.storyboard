@@ -229,7 +229,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Vzx-Uf-1zH">
-                                                    <rect key="frame" x="96" y="8" width="302" height="69"/>
+                                                    <rect key="frame" x="96" y="8" width="75.5" height="69"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssh-Xx-OYz">
                                                             <rect key="frame" x="0.0" y="0.0" width="52.5" height="23"/>
@@ -251,12 +251,23 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mJY-Ik-cAF" customClass="RatingControl" customModule="FavoritePlace" customModuleProvider="target">
+                                                    <rect key="frame" x="281" y="33" width="113" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                                            <size key="value" width="20" height="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Vzx-Uf-1zH" firstAttribute="top" secondItem="drn-K2-BX6" secondAttribute="top" constant="8" id="4Vm-wi-CHh"/>
                                                 <constraint firstItem="970-XX-Dg5" firstAttribute="leading" secondItem="drn-K2-BX6" secondAttribute="leading" constant="15" id="Gcb-RL-wZQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="Vzx-Uf-1zH" secondAttribute="bottom" constant="8" id="RYL-rh-2bM"/>
-                                                <constraint firstAttribute="trailing" secondItem="Vzx-Uf-1zH" secondAttribute="trailing" constant="16" id="gfc-nD-lgC"/>
                                                 <constraint firstItem="Vzx-Uf-1zH" firstAttribute="leading" secondItem="970-XX-Dg5" secondAttribute="trailing" constant="16" id="pI1-f1-adc"/>
                                                 <constraint firstItem="970-XX-Dg5" firstAttribute="centerY" secondItem="drn-K2-BX6" secondAttribute="centerY" id="tFx-iW-Yul"/>
                                             </constraints>
@@ -265,6 +276,7 @@
                                             <outlet property="imageOfPlace" destination="970-XX-Dg5" id="Ct8-sV-l60"/>
                                             <outlet property="locationLabel" destination="NcF-Ai-Rhs" id="QGp-DC-0ts"/>
                                             <outlet property="nameLabel" destination="Ssh-Xx-OYz" id="58n-mM-Jjz"/>
+                                            <outlet property="ratingView" destination="mJY-Ik-cAF" id="DPj-5T-0FT"/>
                                             <outlet property="typeLabel" destination="kCt-F7-uMG" id="kyg-6y-Oju"/>
                                             <segue destination="unD-hC-aaa" kind="show" identifier="showDetail" id="Lld-F3-a2R"/>
                                         </connections>

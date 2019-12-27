@@ -123,6 +123,7 @@ extension RootController : UITableViewDataSource, UITableViewDelegate {
            cell.imageOfPlace.image = UIImage(data: place.imageData!)
            cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
            cell.imageOfPlace.clipsToBounds =  true
+            cell.ratingView.rating = Int(place.rating)
 
            return cell
        }
